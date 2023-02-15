@@ -9,8 +9,9 @@ import Navbar from '../../components/Navbar/Navbar';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 
 const Hotel = () => {
-  const [slideNumber ,setSLideNumber] = useState(0)
+  const [slideNumber ,setSlideNumber] = useState(0)
   const [open ,setOpen] = useState(false)
+
 
 
 
@@ -36,10 +37,20 @@ const Hotel = () => {
     ];
 
     const handleOpen = (index) => {
-    setSLideNumber(index)
+    setSlideNumber(index)
     setOpen(true)
 
     }
+
+    const handleMove =(direction) => {
+      let newSlideNumber ;
+      if(direction === "l"){
+        newSlideNumber = slideNumber === 0 ? 5 : slideNumber - 1
+      }else {
+        newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1
+      }
+      setSlideNumber(newSlideNumber);
+      }
 
 
 
@@ -51,12 +62,12 @@ const Hotel = () => {
     <div className='hotelContainer'>
  
       {open && <div className='slider'>
-        <FontAwesomeIcon icon= {faCircleXmark} className="close" />
-        <FontAwesomeIcon icon={faCircleArrowLeft} className="arrow"  />
+        <FontAwesomeIcon icon= {faCircleXmark} className="close" onClick={() => setOpen(false)}/>
+        <FontAwesomeIcon icon={faCircleArrowLeft} className="arrow" onClick={() => handleMove("l")} />
         <div className='sliderWrapper' >
           <img className='sliderImg' src={photos[slideNumber].src}  alt=""/>
         </div>
-        <FontAwesomeIcon icon={faCircleArrowRight} className="arrow" />
+        <FontAwesomeIcon icon={faCircleArrowRight} className="arrow" onClick = {() => handleMove("r")}/>
       </div>
    }
       <div className='hotelWrapper'>
