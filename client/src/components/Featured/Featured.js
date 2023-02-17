@@ -3,11 +3,11 @@ import './featured.css'
 import useFetch from '../../hooks/useFetch';
 
 const Featured = () => {
-    const {data , error , isLoading } = useFetch("/hotels/countByCity?cities=berlin,madrid,London");
+    const {data , error , loading } = useFetch("/hotels/countByCity?cities=berlin,madrid,London");
     console.log(data);
   return (
     <div className='featured'>
-     {isLoading ? "Loading..." :  <> <div className='featuredItem'>
+     {loading ? "Loading..." :  <> <div className='featuredItem'>
             <img 
             src="https://cf.bstatic.com/xdata/images/city/max500/957801.webp?k=a969e39bcd40cdcc21786ba92826063e3cb09bf307bcfeac2aa392b838e9b7a5&o=" 
             alt=""
