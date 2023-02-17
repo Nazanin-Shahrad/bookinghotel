@@ -4,23 +4,26 @@ import mongoose from "mongoose";
 import authRoute  from './routes/authRoute.js';
 import hotelsRoute from './routes/hotelsRoute.js';
 import roomsRoute from './routes/roomsRoute.js';
-import usersRoute from './routes/usersRoute.js'
+import usersRoute from './routes/usersRoute.js';
+import cookieParser from "cookie-parser";
 const app = express();
 dotenv.config();
 
 const connect = async() => {
  try {
+    mongoose.set("strictQuery", false);
     await mongoose.connect(process.env.MONGO);
     console.log("connected to mongoDB");
 
  } catch(err){
-    throw error
+    throw err
  }
 }
 
 
 
 //middleware
+app.use(cookieParser());
 app.use(express.json());
 
 app.use('/api/auth' , authRoute)
