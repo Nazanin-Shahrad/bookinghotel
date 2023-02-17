@@ -4,6 +4,7 @@ import useFetch from '../../hooks/useFetch.js';
 
 const FeaturedProperties = () => {
     const { data, loading, error } = useFetch("/hotels?featured=true&limit=4");
+    console.log("data baraye featuredproperties::::",data);
 
     return (
       <div className="fp">
