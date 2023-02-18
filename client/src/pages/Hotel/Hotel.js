@@ -9,6 +9,8 @@ import Navbar from '../../components/Navbar/Navbar';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { SearchContext } from '../../context/SearchContext';
 import useFetch from '../../hooks/useFetch';
+import { AuthContext } from '../../context/AuthContext';
+import Reserve from '../../components/Reserve/Reserve';
 
 
 const Hotel = () => {
@@ -17,6 +19,8 @@ const Hotel = () => {
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const {user} = useContext(AuthContext);
+
 
   const { data, loading, error } = useFetch(`/hotels/find/${id}`);
   // const { user } = useContext(AuthContext);
@@ -140,7 +144,7 @@ const Hotel = () => {
           <Footer />
         </div>
       )}
-      {/* {openModal && <Reserve setOpen={setOpenModal} hotelId={id}/>} */}
+      {openModal && <Reserve setOpen={setOpenModal} hotelId={id}/>}
     </div>
   );
 };
