@@ -49,8 +49,6 @@ const Reserve = ({ setOpen, hotelId }) => {
     );
   };
 
-  console.log(selectedRooms);
-
   const navigate = useNavigate();
 
   const handleClick = async () => {

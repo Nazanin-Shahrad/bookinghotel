@@ -18,7 +18,7 @@ const useFetch = (url) => {
       setLoading(false);
     };
     fetchData();
-  }, []);
+  }, [url]);
 
   const reFetch = async () => {
     setLoading(true);
@@ -30,9 +30,8 @@ const useFetch = (url) => {
     }
     setLoading(false);
   };
-  console.log("data in useFetch" , data)
+
   return { data, loading, error, reFetch };
 };
 
 export default useFetch;
-

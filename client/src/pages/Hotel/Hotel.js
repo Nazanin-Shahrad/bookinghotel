@@ -1,17 +1,21 @@
-import React, { useContext, useState } from 'react';
-import './hotel.css';
-import { faCircleArrowLeft, faCircleArrowRight, faCircleXmark, faLocationDot } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Footer from '../../components/Footer/Footer'
-import Header from '../../components/Header/Header'
-import MailList from '../../components/MailList/MailList'
-import Navbar from '../../components/Navbar/Navbar';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom'
-import { SearchContext } from '../../context/SearchContext';
-import useFetch from '../../hooks/useFetch';
-import { AuthContext } from '../../context/AuthContext';
-import Reserve from '../../components/Reserve/Reserve';
-
+import "./hotel.css";
+import Navbar from "../../components/navbar/Navbar";
+import Header from "../../components/header/Header";
+import MailList from "../../components/mailList/MailList";
+import Footer from "../../components/footer/Footer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCircleArrowLeft,
+  faCircleArrowRight,
+  faCircleXmark,
+  faLocationDot,
+} from "@fortawesome/free-solid-svg-icons";
+import { useContext, useState } from "react";
+import useFetch from "../../hooks/useFetch";
+import { useLocation, useNavigate } from "react-router-dom";
+import { SearchContext } from "../../context/SearchContext";
+import { AuthContext } from "../../context/AuthContext";
+import Reserve from "../../components/reserve/Reserve";
 
 const Hotel = () => {
   const location = useLocation();
@@ -19,11 +23,9 @@ const Hotel = () => {
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const {user} = useContext(AuthContext);
-
 
   const { data, loading, error } = useFetch(`/hotels/find/${id}`);
-  // const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const { dates, options } = useContext(SearchContext);
