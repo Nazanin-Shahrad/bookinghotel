@@ -30,7 +30,7 @@ export const deleteHotel = async (req, res, next) => {
     
     try {
         await Hotel.findByIdAndDelete(req.params.id);
-        res.status(200).json({"message" : "recode has been deleted"});
+        res.status(200).json("Hotel has been deleted.");
 
     } catch(err){
       next(err);
@@ -61,23 +61,18 @@ export const getHotel = async (req, res , next) => {
 // }
 
 //get all record
-export const getHotels = async(req , res, next) => {
-    // const {featured ,  limit} = req.query;
+export const getHotels = async (req, res, next) => {
+    const { min, max, ...others } = req.query;
     try {
-       
-        const hotels = await Hotel.find(res.query).limit(req.query.limit);
-        //     ...others, 
-        //     cheapestPrice : {$gte : min | 1 , $lte : max || 999 },
-        // }).limit(req.query.limit)
-        res.status(200).json(hotels);
-
+      const hotels = await Hotel.find({
+        ...others,
+        cheapestPrice: { $gt: min | 1, $lt: max || 999 },
+      }).limit(req.query.limit);
+      res.status(200).json(hotels);
+    } catch (err) {
+      next(err);
     }
-    catch(err){
-        next(err)
-     }
-   
-
-}
+  };
 
 
 export const countByCity = async (req, res , next) => {
