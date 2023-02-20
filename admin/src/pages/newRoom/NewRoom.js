@@ -9,8 +9,9 @@ import axios from "axios";
 
 const NewRoom = () => {
   const [info, setInfo] = useState({});
-  const [hotelId, setHotelId] = useState(undefined);
+  const [hotelId, setHotelId] = useState(null);
   const [rooms, setRooms] = useState([]);
+  console.log("hotel id :::::::::" , hotelId);
 
   const { data, loading, error } = useFetch("/hotels");
 
@@ -20,13 +21,17 @@ const NewRoom = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
+    console.log("roooooooomssss" , rooms);
     const roomNumbers = rooms.split(",").map((room) => ({ number: room }));
     try {
-      await axios.post(`/rooms/${hotelId}`, { ...info, roomNumbers });
+      const res = await axios.post(`/rooms/${hotelId}`, { ...info, roomNumbers });
+      console.log("room saved ::::" , res)
+      console.log("hotel id chie?::::", hotelId)
     } catch (err) {
       console.log(err);
     }
   };
+
 
   console.log(info)
   return (
