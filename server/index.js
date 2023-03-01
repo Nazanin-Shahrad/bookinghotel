@@ -6,6 +6,8 @@ import usersRoute from "./routes/users.js";
 import hotelsRoute from "./routes/hotels.js";
 import roomsRoute from "./routes/rooms.js";
 import cookieParser from "cookie-parser";
+import cors from 'cors';
+import corsOptions from "./config/corsOptions.js";
 
 
 const app = express();
@@ -25,7 +27,7 @@ mongoose.connection.on("disconnected", () => {
 });
 
 //middlewares
-
+app.use(cors(corsOptions))
 app.use(cookieParser())
 app.use(express.json());
 
@@ -33,6 +35,12 @@ app.use("/api/auth", authRoute);
 app.use("/api/users", usersRoute);
 app.use("/api/hotels", hotelsRoute);
 app.use("/api/rooms", roomsRoute);
+app.use("/api" , (req,res)=> {
+  res.send("hello from api")
+})
+app.use("/" , (req,res) => {
+  res.send("hello")
+})
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;
@@ -44,8 +52,9 @@ app.use((err, req, res, next) => {
     stack: err.stack,
   });
 });
-
-app.listen(4000, () => {
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
   connect();
   console.log("Connected to backend.");
+  console.log(`Example app listening on port ${port}!`)
 });

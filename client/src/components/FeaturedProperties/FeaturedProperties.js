@@ -1,8 +1,10 @@
 import useFetch from "../../hooks/useFetch";
 import "./featuredProperties.css";
+import { BASE_URL } from "../../utils/api";
 
 const FeaturedProperties = () => {
-  const { data, loading, error } = useFetch("/hotels?featured=true&limit=4");
+  const { data, loading, error } = useFetch(`${BASE_URL}/hotels?featured=true&limit=4`);
+  console.log("chera data nadare?" , data)
 
   return (
     <div className="fp">
