@@ -11,6 +11,7 @@ import corsOptions from "./config/corsOptions.js";
 
 
 const app = express();
+app.use(cors(corsOptions));
 dotenv.config();
 
 const connect = async () => {
@@ -27,7 +28,7 @@ mongoose.connection.on("disconnected", () => {
 });
 
 //middlewares
-app.use(cors(corsOptions))
+
 app.use(cookieParser())
 app.use(express.json());
 
